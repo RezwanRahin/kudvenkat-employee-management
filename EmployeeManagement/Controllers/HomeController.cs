@@ -4,9 +4,8 @@ namespace EmployeeManagement.Controllers;
 
 public class HomeController : Controller
 {
-    // GET
-    public IActionResult Index()
+    public string Index()
     {
-        return View();
+        return "Hello from MVC";
     }
 }
