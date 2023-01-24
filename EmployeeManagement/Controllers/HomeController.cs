@@ -5,7 +5,7 @@ namespace EmployeeManagement.Controllers;
 
 public class HomeController : Controller
 {
-    private IEmployeeRepository _employeeRepository;
+    private readonly IEmployeeRepository _employeeRepository;
     
     public HomeController(IEmployeeRepository employeeRepository)
     {
