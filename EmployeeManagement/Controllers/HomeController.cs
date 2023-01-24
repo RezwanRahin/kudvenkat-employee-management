@@ -12,8 +12,8 @@ public class HomeController : Controller
         _employeeRepository = employeeRepository;
     }
     
-    public JsonResult Index()
+    public string Index()
     {
-        return Json(new { id = 1, name = "dotnet" });
+        return _employeeRepository.GetEmployee(1).Name;
     }
 }
