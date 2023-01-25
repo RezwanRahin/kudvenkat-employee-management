@@ -20,6 +20,6 @@ public class HomeController : Controller
     public ViewResult Details()
     {
         Employee model = _employeeRepository.GetEmployee(1);
-        return View(model);
+        return View();
     }
 }
