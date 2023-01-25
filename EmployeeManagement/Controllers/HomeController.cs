@@ -20,8 +20,8 @@ public class HomeController : Controller
     public ViewResult Details()
     {
         Employee model = _employeeRepository.GetEmployee(1);
-        ViewData["Employee"] = model;
-        ViewData["PageTitle"] = "Employee Details";
+        ViewBag.PageTitle = "Employee Details";
+        ViewBag.Employee = model;
         return View();
     }
 }
