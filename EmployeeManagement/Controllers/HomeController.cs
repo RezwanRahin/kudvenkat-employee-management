@@ -21,7 +21,6 @@ public class HomeController : Controller
     {
         Employee model = _employeeRepository.GetEmployee(1);
         ViewBag.PageTitle = "Employee Details";
-        ViewBag.Employee = model;
-        return View();
+        return View(model);
     }
 }
