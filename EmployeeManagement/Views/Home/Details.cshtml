@@ -1,4 +1,4 @@
-@model EmployeeManagement.Models.Employee
+@model EmployeeManagement.ViewModels.HomeDetailsViewModel
 
 <!doctype html>
 <html lang="en">
@@ -9,16 +9,16 @@
     <title></title>
 </head>
 <body>
-<h3>@ViewBag.PageTitle</h3>
+<h3>@Model.PageTitle</h3>
 
 <div>
-    Name: @Model.Name
+    Name: @Model.Employee.Name
 </div>
 <div>
-    Email: @Model.Email
+    Email: @Model.Employee.Email
 </div>
 <div>
-    Department: @Model.Department
+    Department: @Model.Employee.Department
 </div>
 </body>
 </html>
