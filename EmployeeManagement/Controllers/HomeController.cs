@@ -15,6 +15,7 @@ public class HomeController : Controller
     
     [Route("")]
     [Route("Index")]
+    [Route("~/")]
     public ViewResult Index()
     {
         var model = _employeeRepository.GetAllEmployees();
