@@ -14,15 +14,14 @@ public class HomeController : Controller
     }
     
     [Route("")]
-    [Route("Home")]
-    [Route("Home/Index")]
+    [Route("Index")]
     public ViewResult Index()
     {
         var model = _employeeRepository.GetAllEmployees();
         return View(model);
     }
 
-    [Route("Home/Details/{id?}")]
+    [Route("Details/{id?}")]
     public ViewResult Details(int? id)
     {
         HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
