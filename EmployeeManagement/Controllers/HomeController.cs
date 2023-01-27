@@ -13,8 +13,7 @@ public class HomeController : Controller
         _employeeRepository = employeeRepository;
     }
     
-    [Route("")]
-    [Route("[action]")]
+    [Route("~/Home")]
     [Route("~/")]
     public ViewResult Index()
     {
@@ -22,7 +21,7 @@ public class HomeController : Controller
         return View(model);
     }
 
-    [Route("[action]/{id?}")]
+    [Route("{id?}")]
     public ViewResult Details(int? id)
     {
         HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
