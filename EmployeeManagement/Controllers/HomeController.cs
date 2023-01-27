@@ -13,6 +13,9 @@ public class HomeController : Controller
         _employeeRepository = employeeRepository;
     }
     
+    [Route("")]
+    [Route("Home")]
+    [Route("Home/Index")]
     public ViewResult Index()
     {
         var model = _employeeRepository.GetAllEmployees();
