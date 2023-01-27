@@ -22,11 +22,12 @@ public class HomeController : Controller
         return View(model);
     }
 
-    public ViewResult Details(int id)
+    [Route("Home/Details/{id?}")]
+    public ViewResult Details(int? id)
     {
         HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
         {
-            Employee = _employeeRepository.GetEmployee(1),
+            Employee = _employeeRepository.GetEmployee(id??1),
             PageTitle = "Employee Details"
         };
 
