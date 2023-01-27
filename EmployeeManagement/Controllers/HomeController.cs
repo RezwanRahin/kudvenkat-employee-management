@@ -12,16 +12,13 @@ public class HomeController : Controller
     {
         _employeeRepository = employeeRepository;
     }
-    
-    [Route("~/Home")]
-    [Route("~/")]
+
     public ViewResult Index()
     {
         var model = _employeeRepository.GetAllEmployees();
         return View(model);
     }
 
-    [Route("{id?}")]
     public ViewResult Details(int? id)
     {
         HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
