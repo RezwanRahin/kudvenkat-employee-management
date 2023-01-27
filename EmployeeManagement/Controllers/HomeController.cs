@@ -14,7 +14,7 @@ public class HomeController : Controller
     }
     
     [Route("")]
-    [Route("Index")]
+    [Route("[action]")]
     [Route("~/")]
     public ViewResult Index()
     {
@@ -22,7 +22,7 @@ public class HomeController : Controller
         return View(model);
     }
 
-    [Route("Details/{id?}")]
+    [Route("[action]/{id?}")]
     public ViewResult Details(int? id)
     {
         HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
