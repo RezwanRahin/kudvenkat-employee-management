@@ -29,4 +29,9 @@ public class HomeController : Controller
 
         return View(homeDetailsViewModel);
     }
+
+    public ViewResult Create()
+    {
+        return View();
+    }
 }
