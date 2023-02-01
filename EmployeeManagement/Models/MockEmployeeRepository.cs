@@ -8,9 +8,9 @@ public class MockEmployeeRepository : IEmployeeRepository
     {
         _employeeList = new List<Employee>()
         {
-            new Employee() { Id=1, Name="Mary", Department="HR", Email="mary@g.com" },
-            new Employee() { Id=2, Name="John", Department="IT", Email="john@g.com" },
-            new Employee() { Id=3, Name="Sam", Department="IT", Email="sam@g.com" }
+            new Employee() { Id=1, Name="Mary", Department=Dept.HR, Email="mary@g.com" },
+            new Employee() { Id=2, Name="John", Department=Dept.IT, Email="john@g.com" },
+            new Employee() { Id=3, Name="Sam", Department=Dept.IT, Email="sam@g.com" }
         };
     }
 
