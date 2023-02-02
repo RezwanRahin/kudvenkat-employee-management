@@ -30,6 +30,7 @@ public class HomeController : Controller
         return View(homeDetailsViewModel);
     }
 
+    [HttpGet]
     public ViewResult Create()
     {
         return View();
