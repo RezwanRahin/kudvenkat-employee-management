@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IEmployeeRepository, MockEmployeeRepository>();
+builder.Services.AddTransient<IEmployeeRepository, MockEmployeeRepository>();
 
 var app = builder.Build();
 
