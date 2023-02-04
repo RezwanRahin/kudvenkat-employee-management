@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace EmployeeManagement.Models;
 
 public class SQLEmployeeRepository : IEmployeeRepository
@@ -27,7 +29,10 @@ public class SQLEmployeeRepository : IEmployeeRepository
 
     public Employee Update(Employee employeeChanges)
     {
-        throw new NotImplementedException();
+        var employee = context.Employees.Attach(employeeChanges);
+        employee.State = EntityState.Modified;
+        context.SaveChanges();
+        return employeeChanges;
     }
 
     public Employee Delete(int Id)
