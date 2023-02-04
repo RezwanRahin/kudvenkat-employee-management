@@ -15,7 +15,7 @@ public class SQLEmployeeRepository : IEmployeeRepository
 
     public IEnumerable<Employee> GetAllEmployees()
     {
-        throw new NotImplementedException();
+        return context.Employees;
     }
 
     public Employee Add(Employee employee)
