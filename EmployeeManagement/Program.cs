@@ -10,7 +10,7 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("EmployeeDBConnection");
 builder.Services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddTransient<IEmployeeRepository, MockEmployeeRepository>();
+builder.Services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
 
 var app = builder.Build();
 
