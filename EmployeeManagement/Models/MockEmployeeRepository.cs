@@ -26,6 +26,28 @@ public class MockEmployeeRepository : IEmployeeRepository
         return employee;
     }
 
+    public Employee Update(Employee employeeChanges)
+    {
+        Employee employee = _employeeList.FirstOrDefault(e => e.Id == employeeChanges.Id);
+        if (employee != null)
+        {
+            employee.Name = employeeChanges.Name;
+            employee.Email = employeeChanges.Email;
+            employee.Department = employee.Department;
+        }
+        return employee;
+    }
+
+    public Employee Delete(int Id)
+    {
+        Employee employee = _employeeList.FirstOrDefault(e => e.Id == Id);
+        if (employee != null)
+        {
+            _employeeList.Remove(employee);
+        }
+        return employee;
+    }
+
     public Employee GetEmployee(int Id)
     {
         return _employeeList.FirstOrDefault(e => e.Id == Id);
