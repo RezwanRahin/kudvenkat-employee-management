@@ -32,6 +32,12 @@ public class SQLEmployeeRepository : IEmployeeRepository
 
     public Employee Delete(int Id)
     {
-        throw new NotImplementedException();
+        Employee employee = context.Employees.Find(Id);
+        if (employee != null)
+        {
+            context.Employees.Remove(employee);
+            context.SaveChanges();
+        }
+        return employee;
     }
 }
