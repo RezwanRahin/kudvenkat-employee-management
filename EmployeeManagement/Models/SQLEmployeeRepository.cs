@@ -10,7 +10,7 @@ public class SQLEmployeeRepository : IEmployeeRepository
     
     public Employee GetEmployee(int Id)
     {
-        throw new NotImplementedException();
+        return context.Employees.Find(Id);
     }
 
     public IEnumerable<Employee> GetAllEmployees()
