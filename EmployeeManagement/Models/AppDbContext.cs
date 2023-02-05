@@ -17,9 +17,16 @@ public class AppDbContext : DbContext
                 new Employee
                 {
                     Id = 1,
-                    Name = "Mark",
+                    Name = "Mary",
                     Department = Dept.IT,
-                    Email = "mark@g.com"
+                    Email = "mary@g.com"
+                },
+                new Employee
+                {
+                    Id = 2,
+                    Name = "John",
+                    Department = Dept.IT,
+                    Email = "john@g.com"
                 }
             );
     }
