@@ -1,16 +1,19 @@
 using EmployeeManagement.Models;
 using EmployeeManagement.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace EmployeeManagement.Controllers;
 
 public class HomeController : Controller
 {
     private readonly IEmployeeRepository _employeeRepository;
-    
-    public HomeController(IEmployeeRepository employeeRepository)
+    private readonly IHostingEnvironment _hostingEnvironment;
+
+    public HomeController(IEmployeeRepository employeeRepository, IHostingEnvironment hostingEnvironment)
     {
         _employeeRepository = employeeRepository;
+        _hostingEnvironment = hostingEnvironment;
     }
 
     public ViewResult Index()
