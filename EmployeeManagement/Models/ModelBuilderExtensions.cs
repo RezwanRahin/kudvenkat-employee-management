@@ -12,14 +12,16 @@ public static class ModelBuilderExtensions
                 Id = 1,
                 Name = "Mary",
                 Department = Dept.IT,
-                Email = "mary@g.com"
+                Email = "mary@g.com",
+                PhotoPath = "path1"
             },
             new Employee
             {
                 Id = 2,
                 Name = "John",
                 Department = Dept.IT,
-                Email = "john@g.com"
+                Email = "john@g.com",
+                PhotoPath = "path2"
             }
         );
     }
