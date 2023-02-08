@@ -14,5 +14,5 @@ public class EmployeeCreateViewModel
     public string Email { get; set; }
     [Required]
     public Dept? Department { get; set; }
-    public IFormFile Photo { get; set; }
+    public IFormFile Photos { get; set; }
 }
