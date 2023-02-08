@@ -29,10 +29,10 @@
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="Photos" class="col-sm-2 col-form-label"></label>
+        <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
             <div class="custom-file">
-                <input multiple asp-for="Photos" class="form-control custom-file-input"/>
+                <input asp-for="Photo" class="form-control custom-file-input"/>
                 <label class="custom-file-label">Choose File...</label>
             </div>
         </div>
@@ -50,14 +50,8 @@
         <script>
             $(document).ready(function () {
                 $('.custom-file-input').on("change", function () {
-                    var fileLabel = $(this).next('.custom-file-label');
-                    var files = $(this)[0].files;
-                    if (files.length > 1) {
-                        fileLabel.html(files.length + ' files selected');
-                    }
-                    else if (files.length == 1) {
-                        fileLabel.html(files[0].name);
-                    }
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
                 });
             });
         </script>
