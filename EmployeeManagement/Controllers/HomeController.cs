@@ -33,6 +33,24 @@ public class HomeController : Controller
         return View(homeDetailsViewModel);
     }
 
+    private string ProcessUploadedFile(EmployeeCreateViewModel model)
+    {
+        string uniqueFileName = null;
+        
+        if (model.Photo != null)
+        {
+            string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+            uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                model.Photo.CopyTo(fileStream);
+            }
+        }
+
+        return uniqueFileName;
+    }
+
     [HttpGet]
     public ViewResult Create()
     {
@@ -44,14 +62,7 @@ public class HomeController : Controller
     {
         if (ModelState.IsValid)
         {
-            string uniqueFileName = null;
-            if (model.Photo != null)
-            {
-                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
-            }
+            string uniqueFileName = ProcessUploadedFile(model);
 
             Employee newEmployee = new Employee()
             {
