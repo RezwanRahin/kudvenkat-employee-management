@@ -93,4 +93,30 @@ public class HomeController : Controller
         };
         return View(employeeEditViewModel);
     }
+
+    [HttpPost]
+    public IActionResult Edit(EmployeeEditViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            Employee employee = _employeeRepository.GetEmployee(model.Id);
+            employee.Name = model.Name;
+            employee.Email = model.Email;
+            employee.Department = model.Department;
+            if (model.Photo != null)
+            {
+                if (model.ExistingPhotoPath != null)
+                {
+                    string filePath = Path.Combine(_hostingEnvironment.WebRootPath, "images", model.ExistingPhotoPath);
+                    System.IO.File.Delete(filePath);
+                }
+                employee.PhotoPath = ProcessUploadedFile(model);
+            }
+
+            _employeeRepository.Update(employee);
+            return RedirectToAction("Index");
+        }
+        
+        return View(model);
+    }
 }
