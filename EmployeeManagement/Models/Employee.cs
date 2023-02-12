@@ -14,5 +14,5 @@ public class Employee
     public string Email { get; set; }
     [Required]
     public Dept? Department { get; set; }
-    public string PhotoPath { get; set; }
+    public string? PhotoPath { get; set; }
 }
