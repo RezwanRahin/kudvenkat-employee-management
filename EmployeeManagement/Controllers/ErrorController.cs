@@ -6,6 +6,13 @@ namespace EmployeeManagement.Controllers;
 
 public class ErrorController : Controller
 {
+    private readonly ILogger<ErrorController> _logger;
+
+    public ErrorController(ILogger<ErrorController> logger)
+    {
+        _logger = logger;
+    }
+    
     [Route("Error/{statusCode}")]
     public IActionResult HttpStatusCodeHandler(int statusCode)
     {
