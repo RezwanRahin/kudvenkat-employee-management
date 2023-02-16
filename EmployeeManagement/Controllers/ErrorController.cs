@@ -36,9 +36,7 @@ public class ErrorController : Controller
     {
         var exceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
-        ViewBag.ExceptionPath = exceptionDetails.Path;
-        ViewBag.ExceptionMessage = exceptionDetails.Error.Message;
-        ViewBag.stacktrace = exceptionDetails.Error.StackTrace;
+        _logger.LogError($"The path {exceptionDetails.Path} threw an exception {exceptionDetails.Error}");
 
         return View("Error");
     }
