@@ -24,6 +24,8 @@ public class HomeController : Controller
 
     public ViewResult Details(int? id)
     {
+        throw new Exception("Error in Details view");
+
         Employee employee = _employeeRepository.GetEmployee(id.Value);
 
         if (employee == null)
