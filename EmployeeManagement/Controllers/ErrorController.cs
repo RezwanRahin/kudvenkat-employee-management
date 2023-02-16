@@ -22,8 +22,7 @@ public class ErrorController : Controller
         {
             case 404:
                 ViewBag.ErrorMessage = "Sorry, the rosource you requested could not be found";
-                ViewBag.Path = statusCodeResult.OriginalPath;
-                ViewBag.QS = statusCodeResult.OriginalQueryString;
+                _logger.LogWarning($"404 Error Occured. Path = {statusCodeResult.OriginalPath} and Querystring = {statusCodeResult.OriginalQueryString}");
                 break;
         }
 
