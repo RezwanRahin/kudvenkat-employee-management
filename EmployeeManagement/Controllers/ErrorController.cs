@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,5 +21,18 @@ public class ErrorController : Controller
         }
 
         return View("NotFound");
+    }
+
+    [Route("Error")]
+    [AllowAnonymous]
+    public IActionResult Error()
+    {
+        var exceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
+        ViewBag.ExceptionPath = exceptionDetails.Path;
+        ViewBag.ExceptionMessage = exceptionDetails.Error.Message;
+        ViewBag.stacktrace = exceptionDetails.Error.StackTrace;
+
+        return View("Error");
     }
 }
