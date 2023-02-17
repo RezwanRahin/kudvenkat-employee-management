@@ -15,6 +15,13 @@ public class SQLEmployeeRepository : IEmployeeRepository
     
     public Employee GetEmployee(int Id)
     {
+        _logger.LogTrace("Trace Log");
+        _logger.LogDebug("Debug Log");
+        _logger.LogInformation("Information Log");
+        _logger.LogWarning("Warning Log");
+        _logger.LogError("Error Log");
+        _logger.LogCritical("Critical Log");
+
         return context.Employees.Find(Id);
     }
 
