@@ -1,4 +1,5 @@
 using EmployeeManagement.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
@@ -18,6 +19,9 @@ builder.Host.UseNLog();
 // Register DbContext
 var connectionString = builder.Configuration.GetConnectionString("EmployeeDBConnection");
 builder.Services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(connectionString));
+
+// Identity Services
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
 
