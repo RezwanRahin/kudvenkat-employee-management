@@ -9,11 +9,13 @@ public class HomeController : Controller
 {
     private readonly IEmployeeRepository _employeeRepository;
     private readonly IHostingEnvironment _hostingEnvironment;
+    private readonly ILogger<HomeController> _logger;
 
-    public HomeController(IEmployeeRepository employeeRepository, IHostingEnvironment hostingEnvironment)
+    public HomeController(IEmployeeRepository employeeRepository, IHostingEnvironment hostingEnvironment, ILogger<HomeController> logger)
     {
         _employeeRepository = employeeRepository;
         _hostingEnvironment = hostingEnvironment;
+        _logger = logger;
     }
 
     public ViewResult Index()
