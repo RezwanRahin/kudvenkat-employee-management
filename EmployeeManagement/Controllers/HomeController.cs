@@ -26,7 +26,14 @@ public class HomeController : Controller
 
     public ViewResult Details(int? id)
     {
-        throw new Exception("Error in Details view");
+        // throw new Exception("Error in Details view");
+
+        _logger.LogTrace("Trace Log");
+        _logger.LogDebug("Debug Log");
+        _logger.LogInformation("Information Log");
+        _logger.LogWarning("Warning Log");
+        _logger.LogError("Error Log");
+        _logger.LogCritical("Critical Log");
 
         Employee employee = _employeeRepository.GetEmployee(id.Value);
 
