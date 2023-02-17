@@ -5,9 +5,12 @@ namespace EmployeeManagement.Models;
 public class SQLEmployeeRepository : IEmployeeRepository
 {
     private readonly AppDbContext context;
-    public SQLEmployeeRepository(AppDbContext context)
+    private readonly ILogger<SQLEmployeeRepository> _logger;
+
+    public SQLEmployeeRepository(AppDbContext context, ILogger<SQLEmployeeRepository> logger)
     {
         this.context = context;
+        _logger = logger;
     }
     
     public Employee GetEmployee(int Id)
