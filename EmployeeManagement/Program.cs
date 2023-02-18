@@ -21,7 +21,11 @@ var connectionString = builder.Configuration.GetConnectionString("EmployeeDBConn
 builder.Services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(connectionString));
 
 // Identity Services
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    options.Password.RequiredLength = 10;
+    options.Password.RequiredUniqueChars = 3;
+}).AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
 
