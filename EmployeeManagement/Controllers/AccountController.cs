@@ -14,6 +14,13 @@ public class AccountController : Controller
         _userManager = userManager;
         _signInManager = signInManager;
     }
+
+    [HttpPost]
+    public async Task<IActionResult> Logout()
+    {
+        await _signInManager.SignOutAsync();
+        return RedirectToAction("Index", "Home");
+    }
     
     [HttpGet]
     public IActionResult Register()
