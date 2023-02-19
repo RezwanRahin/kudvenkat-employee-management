@@ -50,4 +50,10 @@ public class AccountController : Controller
 
         return View(model);
     }
+
+    [HttpGet]
+    public IActionResult Login()
+    {
+        return View();
+    }
 }
