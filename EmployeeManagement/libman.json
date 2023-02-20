@@ -9,6 +9,10 @@
     {
       "library": "jquery@3.3.1",
       "destination": "wwwroot/lib/jquery"
+    },
+    {
+      "library": "jquery-validate@1.19.5",
+      "destination": "wwwroot/lib/jquery-validate"
     }
   ]
 }
