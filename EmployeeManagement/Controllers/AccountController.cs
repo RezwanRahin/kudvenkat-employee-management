@@ -71,7 +71,7 @@ public class AccountController : Controller
 
             if (result.Succeeded)
             {
-                if (!string.IsNullOrEmpty(returnUrl))
+                if (Url.IsLocalUrl(returnUrl))
                 {
                     return Redirect(returnUrl);
                 }
