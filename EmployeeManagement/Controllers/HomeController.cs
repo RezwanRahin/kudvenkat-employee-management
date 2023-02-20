@@ -1,5 +1,6 @@
 using EmployeeManagement.Models;
 using EmployeeManagement.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
@@ -71,12 +72,14 @@ public class HomeController : Controller
     }
 
     [HttpGet]
+    [Authorize]
     public ViewResult Create()
     {
         return View();
     }
 
     [HttpPost]
+    [Authorize]
     public IActionResult Create(EmployeeCreateViewModel model)
     {
         if (ModelState.IsValid)
@@ -99,6 +102,7 @@ public class HomeController : Controller
     }
 
     [HttpGet]
+    [Authorize]
     public ViewResult Edit(int id)
     {
         Employee employee = _employeeRepository.GetEmployee(id);
@@ -114,6 +118,7 @@ public class HomeController : Controller
     }
 
     [HttpPost]
+    [Authorize]
     public IActionResult Edit(EmployeeEditViewModel model)
     {
         if (ModelState.IsValid)
