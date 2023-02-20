@@ -20,12 +20,14 @@ public class HomeController : Controller
         _logger = logger;
     }
 
+    [AllowAnonymous]
     public ViewResult Index()
     {
         var model = _employeeRepository.GetAllEmployees();
         return View(model);
     }
 
+    [AllowAnonymous]
     public ViewResult Details(int? id)
     {
         // throw new Exception("Error in Details view");
