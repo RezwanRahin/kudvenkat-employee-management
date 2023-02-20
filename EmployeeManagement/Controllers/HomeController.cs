@@ -6,6 +6,7 @@ using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace EmployeeManagement.Controllers;
 
+[Authorize]
 public class HomeController : Controller
 {
     private readonly IEmployeeRepository _employeeRepository;
