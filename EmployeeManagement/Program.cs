@@ -1,5 +1,7 @@
 using EmployeeManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
@@ -26,6 +28,13 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Password.RequiredLength = 10;
     options.Password.RequiredUniqueChars = 3;
 }).AddEntityFrameworkStores<AppDbContext>();
+
+// Authorization Services
+builder.Services.AddControllers(config =>
+{
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    config.Filters.Add(new AuthorizeFilter(policy));
+});
 
 builder.Services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
 
