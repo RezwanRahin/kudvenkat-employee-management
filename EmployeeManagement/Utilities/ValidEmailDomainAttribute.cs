@@ -10,4 +10,10 @@ public class ValidEmailDomainAttribute : ValidationAttribute
     {
         _allowedDomain = allowedDomain;
     }
+
+    public override bool IsValid(object value)
+    {
+        string[] strings = value.ToString().Split('@');
+        return strings[1].ToUpper() == _allowedDomain.ToUpper();
+    }
 }
