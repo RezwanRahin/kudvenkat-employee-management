@@ -23,7 +23,7 @@ var connectionString = builder.Configuration.GetConnectionString("EmployeeDBConn
 builder.Services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(connectionString));
 
 // Identity Services
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.Password.RequiredLength = 10;
     options.Password.RequiredUniqueChars = 3;
