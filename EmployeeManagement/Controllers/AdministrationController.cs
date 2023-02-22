@@ -11,4 +11,10 @@ public class AdministrationController : Controller
     {
         _roleManager = roleManager;
     }
+    
+    [HttpGet]
+    public IActionResult CreateRole()
+    {
+        return View();
+    }
 }
