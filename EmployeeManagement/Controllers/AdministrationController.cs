@@ -29,7 +29,7 @@ public class AdministrationController : Controller
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ListRoles", "Administration");
             }
 
             foreach (IdentityError error in result.Errors)
