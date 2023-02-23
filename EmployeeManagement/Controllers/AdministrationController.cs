@@ -64,7 +64,7 @@ public class AdministrationController : Controller
 
         var model = new EditRoleViewModel{ Id = role.Id, RoleName = role.Name };
 
-        foreach (var user in _userManager.Users)
+        foreach (var user in _userManager.Users.ToList())
         {
             if (await _userManager.IsInRoleAsync(user, role.Name))
             {
