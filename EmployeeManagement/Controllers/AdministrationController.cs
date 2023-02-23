@@ -1,3 +1,4 @@
+using EmployeeManagement.Models;
 using EmployeeManagement.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,10 +8,12 @@ namespace EmployeeManagement.Controllers;
 public class AdministrationController : Controller
 {
     private readonly RoleManager<IdentityRole> _roleManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public AdministrationController(RoleManager<IdentityRole> roleManager)
+    public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
     {
         _roleManager = roleManager;
+        _userManager = userManager;
     }
     
     [HttpGet]
