@@ -103,4 +103,11 @@ public class AccountController : Controller
             return Json($"Email {email} is already in use");
         }
     }
+
+    [HttpGet]
+    [AllowAnonymous]
+    public IActionResult AccessDenied()
+    {
+        return View();
+    }
 }
