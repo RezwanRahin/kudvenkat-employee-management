@@ -188,4 +188,31 @@ public class AdministrationController : Controller
 
         return RedirectToAction("EditRole", new { Id = roleId });
     }
+
+    [HttpGet]
+    public async Task<IActionResult> EditUser(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+
+        if (user == null)
+        {
+            ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+            return View("NotFound");
+        }
+
+        var userClaims = await _userManager.GetClaimsAsync(user);
+        var userRoles = await _userManager.GetRolesAsync(user);
+
+        var model = new EditUserViewModel()
+        {
+            Id = user.Id,
+            UserName = user.UserName,
+            Email = user.Email,
+            City = user.City,
+            Claims = userClaims.Select(c => c.Value).ToList(),
+            Roles = userRoles
+        };
+
+        return View(model);
+    }
 }
