@@ -17,6 +17,13 @@ public class AdministrationController : Controller
         _roleManager = roleManager;
         _userManager = userManager;
     }
+
+    [HttpGet]
+    public IActionResult ListUsers()
+    {
+        var users = _userManager.Users;
+        return View(users);
+    }
     
     [HttpGet]
     public IActionResult CreateRole()
