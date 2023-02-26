@@ -247,4 +247,32 @@ public class AdministrationController : Controller
             return View(model);
         }
     }
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteUser(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+
+        if (user == null)
+        {
+            ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+            return View("NotFound");
+        }
+        else
+        {
+            var result = await _userManager.DeleteAsync(user);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("ListUsers");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return View("ListUsers");
+        }
+    }
 }
