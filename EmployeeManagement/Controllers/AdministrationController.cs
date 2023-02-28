@@ -3,6 +3,7 @@ using EmployeeManagement.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManagement.Controllers;
 
@@ -292,19 +293,31 @@ public class AdministrationController : Controller
         }
         else
         {
-            var result = await _roleManager.DeleteAsync(role);
-
-            if (result.Succeeded)
+            try
             {
-                return RedirectToAction("ListRoles");
-            }
+                var result = await _roleManager.DeleteAsync(role);
 
-            foreach (var error in result.Errors)
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListRoles");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+                return View("ListRoles");
+            }
+            catch (DbUpdateException ex)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                _logger.LogError($"Exception Occured: {ex}");
+                
+                ViewBag.ErrorTitle = $"{role.Name} role is in use";
+                ViewBag.ErrorMessage = $"{role.Name} role cannot be deleted as there are users in this role. " +
+                                       $"If you want to delete this role, please remove the users from the role and then try to delete";
+                return View("Error");
             }
-
-            return View("ListRoles");
         }
     }
 }
