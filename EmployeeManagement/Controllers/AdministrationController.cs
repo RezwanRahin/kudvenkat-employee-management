@@ -11,11 +11,15 @@ public class AdministrationController : Controller
 {
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly ILogger<AdministrationController> _logger;
 
-    public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+    public AdministrationController(RoleManager<IdentityRole> roleManager, 
+        UserManager<ApplicationUser> userManager,
+        ILogger<AdministrationController> logger)
     {
         _roleManager = roleManager;
         _userManager = userManager;
+        _logger = logger;
     }
 
     [HttpGet]
