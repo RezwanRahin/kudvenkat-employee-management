@@ -353,5 +353,36 @@ public class AdministrationController : Controller
         }
 
         return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ManageUserRoles(List<UserRolesViewModel> models, string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+
+        if (user == null)
+        {
+            ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
+            return View("NotFound");
+        }
+
+        var roles = await _userManager.GetRolesAsync(user);
+        var result = await _userManager.RemoveFromRolesAsync(user, roles);
+
+        if (! result.Succeeded)
+        {
+            ModelState.AddModelError(string.Empty, "Cannot remove user existing roles");
+            return View(models);
+        }
+
+        result = await _userManager.AddToRolesAsync(user, models.Where(x => x.IsSelected).Select(y => y.RoleName));
+
+        if (! result.Succeeded)
+        {
+            ModelState.AddModelError(string.Empty, "Cannot add selected roles to user");
+            return View(models);
+        }
+
+        return RedirectToAction("EditUser", new { Id = userId });
     }   
 }
