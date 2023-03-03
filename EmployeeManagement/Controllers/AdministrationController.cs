@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using EmployeeManagement.Models;
 using EmployeeManagement.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -384,5 +385,35 @@ public class AdministrationController : Controller
         }
 
         return RedirectToAction("EditUser", new { Id = userId });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ManageUserClaims(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+
+        if (user == null)
+        {
+            ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
+            return View("NotFound");
+        }
+
+        var existingUserClaims = await _userManager.GetClaimsAsync(user);
+
+        var model = new UserClaimsViewModel{ UserId = userId };
+
+        foreach (Claim claim in ClaimsStore.AllClaims)
+        {
+            UserClaim userClaims = new UserClaim{ ClaimType = claim.Type };
+
+            if (existingUserClaims.Any(c => c.Type == claim.Type))
+            {
+                userClaims.IsSelected = true;
+            }
+
+            model.Claims.Add(userClaims);
+        }
+
+        return View(model);
     }   
 }
