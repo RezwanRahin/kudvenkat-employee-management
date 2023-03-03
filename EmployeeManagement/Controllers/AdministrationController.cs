@@ -415,5 +415,36 @@ public class AdministrationController : Controller
         }
 
         return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ManageUserClaims(UserClaimsViewModel model)
+    {
+        var user = await _userManager.FindByIdAsync(model.UserId);
+
+        if (user == null)
+        {
+            ViewBag.ErrorMessage = $"User with Id = {model.UserId} cannot be found";
+            return View("NotFound");
+        }
+
+        var claims = await _userManager.GetClaimsAsync(user);
+        var result = await _userManager.RemoveClaimsAsync(user, claims);
+
+        if (! result.Succeeded)
+        {
+            ModelState.AddModelError(string.Empty, "Cannot remove user existing claims");
+            return View(model);
+        }
+
+        result = await _userManager.AddClaimsAsync(user, model.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.ClaimType)));
+
+        if (! result.Succeeded)
+        {
+            ModelState.AddModelError(string.Empty, "Cannot add selected claims to user");
+            return View(model);
+        }
+
+        return RedirectToAction("EditUser", new { Id = model.UserId });
     }   
 }
