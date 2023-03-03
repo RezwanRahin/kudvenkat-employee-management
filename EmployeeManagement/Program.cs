@@ -36,6 +36,13 @@ builder.Services.AddControllers(config =>
     config.Filters.Add(new AuthorizeFilter(policy));
 });
 
+// Policy Configurations
+builder.Services.AddAuthorization(options =>
+{
+    // Claims Policy
+    options.AddPolicy("DeleteRolePolicy", policy => policy.RequireClaim("Delete Role"));
+});
+
 builder.Services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
 
 var app = builder.Build();
