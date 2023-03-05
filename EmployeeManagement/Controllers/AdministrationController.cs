@@ -217,7 +217,7 @@ public class AdministrationController : Controller
             UserName = user.UserName,
             Email = user.Email,
             City = user.City,
-            Claims = userClaims.Select(c => c.Value).ToList(),
+            Claims = userClaims.Select(c => c.Type + " : " + c.Value).ToList(),
             Roles = userRoles
         };
 
