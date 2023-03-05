@@ -36,6 +36,11 @@ builder.Services.AddControllers(config =>
     config.Filters.Add(new AuthorizeFilter(policy));
 });
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.AccessDeniedPath = new PathString("/Administration/AccessDenied");
+});
+
 // Policy Configurations
 builder.Services.AddAuthorization(options =>
 {
