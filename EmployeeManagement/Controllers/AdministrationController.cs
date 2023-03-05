@@ -440,7 +440,7 @@ public class AdministrationController : Controller
             return View(model);
         }
 
-        result = await _userManager.AddClaimsAsync(user, model.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.ClaimType)));
+        result = await _userManager.AddClaimsAsync(user, model.Claims.Select(c => new Claim(c.ClaimType, c.IsSelected ? "true" : "false")));
 
         if (! result.Succeeded)
         {
