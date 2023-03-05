@@ -409,7 +409,7 @@ public class AdministrationController : Controller
         {
             UserClaim userClaims = new UserClaim{ ClaimType = claim.Type };
 
-            if (existingUserClaims.Any(c => c.Type == claim.Type))
+            if (existingUserClaims.Any(c => c.Type == claim.Type && c.Value == "true"))
             {
                 userClaims.IsSelected = true;
             }
