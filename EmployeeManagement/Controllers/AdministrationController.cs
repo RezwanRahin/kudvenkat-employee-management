@@ -67,7 +67,6 @@ public class AdministrationController : Controller
     }
 
     [HttpGet]
-    [Authorize(Policy = "EditRolePolicy")]
     public async Task<IActionResult> EditRole(string id)
     {
         var role = await _roleManager.FindByIdAsync(id);
@@ -92,7 +91,6 @@ public class AdministrationController : Controller
     }
 
     [HttpPost]
-    [Authorize(Policy = "EditRolePolicy")]
     public async Task<IActionResult> EditRole(EditRoleViewModel model)
     {
         var role = await _roleManager.FindByIdAsync(model.Id);
