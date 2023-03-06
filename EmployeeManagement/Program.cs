@@ -57,6 +57,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
 
 builder.Services.AddSingleton<IAuthorizationHandler, CanEditOnlyOtherAdminRolesAndClaimsHandler>();
+builder.Services.AddSingleton<IAuthorizationHandler, SuperAdminHandler>();
 
 var app = builder.Build();
 
