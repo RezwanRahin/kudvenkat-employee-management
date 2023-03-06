@@ -1,4 +1,5 @@
 using EmployeeManagement.Models;
+using EmployeeManagement.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -46,18 +47,16 @@ builder.Services.AddAuthorization(options =>
 {
     // Claims Policy
     options.AddPolicy("DeleteRolePolicy", policy => policy.RequireClaim("Delete Role"));
-    options.AddPolicy("EditRolePolicy", policy => policy.RequireAssertion(context =>
-        context.User.IsInRole("Admin") &&
-        context.User.HasClaim(claim => claim.Type == "Edit Role" && claim.Value == "true") ||
-        context.User.IsInRole("Super Admin")
-    ));
-    
+    options.AddPolicy("EditRolePolicy", policy => policy.AddRequirements(new ManageAdminRolesAndClaimsRequirement()));
+
     // Roles Policy
     options.AddPolicy("AdminRolePolicy", policy => policy.RequireRole("Admin"));
 
 });
 
 builder.Services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
+
+builder.Services.AddSingleton<IAuthorizationHandler, CanEditOnlyOtherAdminRolesAndClaimsHandler>();
 
 var app = builder.Build();
 
