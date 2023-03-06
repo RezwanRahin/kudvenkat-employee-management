@@ -324,6 +324,7 @@ public class AdministrationController : Controller
     }
 
     [HttpGet]
+    [Authorize(Policy = "EditRolePolicy")]
     public async Task<IActionResult> ManageUserRoles(string userId)
     {
         ViewBag.userId = userId;
@@ -358,6 +359,7 @@ public class AdministrationController : Controller
     }
 
     [HttpPost]
+    [Authorize(Policy = "EditRolePolicy")]
     public async Task<IActionResult> ManageUserRoles(List<UserRolesViewModel> models, string userId)
     {
         var user = await _userManager.FindByIdAsync(userId);
